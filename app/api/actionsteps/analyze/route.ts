@@ -1,12 +1,18 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { analyzeActionSteps } from "@/lib/apps/actionsteps/analyze";
+import { authenticateApplication } from "@/lib/auth/apiKey";
+import { unauthorizedResponse } from "@/lib/auth/unauthorized";
 
 const requestSchema = z.object({
   transcript: z.string().trim().min(1, "Transcript is required."),
 });
 
 export async function POST(request: Request) {
+  if (!authenticateApplication(request, "actionsteps")) {
+    return unauthorizedResponse();
+  }
+
   try {
     const body = await request.json();
 

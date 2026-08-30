@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { transcribeAudio } from "@/lib/openai/transcription";
+import { authenticateApplication } from "@/lib/auth/apiKey";
+import { unauthorizedResponse } from "@/lib/auth/unauthorized";
 
 const MAX_FILE_SIZE = 25 * 1024 * 1024;
 
@@ -15,6 +17,10 @@ const ALLOWED_AUDIO_TYPES = new Set([
 const ALLOWED_AUDIO_EXTENSIONS = new Set([".m4a", ".mp3"]);
 
 export async function POST(request: Request) {
+  if (!authenticateApplication(request, "actionsteps")) {
+    return unauthorizedResponse();
+  }
+
   try {
     const contentType = request.headers.get("content-type");
 
