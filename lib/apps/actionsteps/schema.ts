@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const actionSchema = z.object({
+export const actionSchema = z.object({
   id: z.string(),
   title: z.string(),
   details: z.string(),
@@ -11,15 +11,10 @@ const actionSchema = z.object({
 export const actionStepsSchema = z.object({
   title: z.string(),
   summary: z.string(),
-
   actions: z.array(actionSchema),
-
   questions: z.array(z.string()),
-
   dependencies: z.array(z.string()),
-
   decisions: z.array(z.string()),
-
   next_step: z.string(),
 });
 
