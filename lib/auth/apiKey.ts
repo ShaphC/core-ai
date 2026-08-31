@@ -1,9 +1,10 @@
 import { timingSafeEqual } from "crypto";
 
-type Application = "actionsteps";
+type Application = "actionsteps" | "professional-responder";
 
 const applicationKeys: Record<Application, string | undefined> = {
   actionsteps: process.env.ACTIONSTEPS_API_KEY,
+  "professional-responder": process.env.PROFESSIONAL_RESPONDER_API_KEY,
 };
 
 export function authenticateApplication(
