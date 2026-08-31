@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { generateProfessionalResponse } from "@/lib/apps/professional-responder/generate";
-import { professionalResponderRequestSchema } from "@/lib/apps/professional-responder/requestSchema";
+import { professionalResponderRequestSchema } from "@/lib/apps/professional-responder/schema";
 import { authenticateApplication } from "@/lib/auth/apiKey";
 import { unauthorizedResponse } from "@/lib/auth/unauthorized";
 
